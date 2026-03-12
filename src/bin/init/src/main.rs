@@ -257,6 +257,7 @@ fn main() {
         let line = match editor.readline("twz> ", &mut io) {
             Ok(l) => l,
             Err(_) => {
+                // Catches the 0x03 byte (Ctrl+C) to abort the current cmd
                 continue;
             }
         };
@@ -265,6 +266,7 @@ fn main() {
             continue;
         }
 
+        // exit commmand to shutdown QEMU (Crtl+A, X)
         match cmd[0] {
             "exit" => {
                 twizzler_abi::syscall::sys_full_shutdown();
@@ -318,6 +320,8 @@ fn main() {
                             println!("^C");
 
                             // 3. Suspend every thread attached to the compartment
+                            // WARNING: Does not kill the thread, only suspends it
+                            // Couldn't find a way to reliably kill threads atm :(
                             for thread_info in comp.threads() {
                                 let res = twizzler_abi::syscall::sys_thread_change_state(
                                     thread_info.repr_id,

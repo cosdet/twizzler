@@ -90,6 +90,7 @@ pub fn set_interrupt(
     ioapic::set_interrupt(num - 32, num, masked, trigger, polarity, destination);
 }
 
+/// Kernel function to fully shutdown QEMU
 pub fn full_shutdown() {
     log::info!("performing full shutdown");
     unsafe {
