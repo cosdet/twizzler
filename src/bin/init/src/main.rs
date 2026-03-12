@@ -254,10 +254,23 @@ fn main() {
     loop {
         //let mstats = monitor_api::stats().unwrap();
         //println!("{:?}", mstats);
-        let line = editor.readline("twz> ", &mut io).unwrap();
+        let line = match editor.readline("twz> ", &mut io) {
+            Ok(l) => l,
+            Err(_) => {
+                continue;
+            }
+        };
         let cmd = line.split_whitespace().collect::<Vec<_>>();
-        if cmd.len() == 0 {
+        if cmd.is_empty() {
             continue;
+        }
+
+        match cmd[0] {
+            "exit" => {
+                twizzler_abi::syscall::sys_full_shutdown();
+                break;
+            }
+            _ => (),
         }
 
         let background = cmd.iter().any(|s| *s == "&");
@@ -291,7 +304,36 @@ fn main() {
             } else {
                 let mut flags = comp.info().flags;
                 while !flags.contains(CompartmentFlags::EXITED) {
-                    flags = comp.wait(flags);
+                    // 1. Perform a NON-BLOCKING read from the kernel console
+                    let mut buf = [0; 16];
+                    let read_res = twizzler_abi::syscall::sys_kernel_console_read(
+                        twizzler_abi::syscall::KernelConsoleSource::Console,
+                        &mut buf,
+                        twizzler_abi::syscall::KernelConsoleReadFlags::NONBLOCKING,
+                    );
+
+                    // 2. Catch the Ctrl+C
+                    if let Ok(count) = read_res {
+                        if count > 0 && buf[..count].contains(&3) {
+                            println!("^C");
+
+                            // 3. Suspend every thread attached to the compartment
+                            for thread_info in comp.threads() {
+                                let res = twizzler_abi::syscall::sys_thread_change_state(
+                                    thread_info.repr_id,
+                                    twizzler_abi::thread::ExecutionState::Suspended,
+                                );
+                                println!(
+                                    "Sent Suspend to thread {:?}: {:?}",
+                                    thread_info.repr_id, res
+                                );
+                            }
+                            break;
+                        }
+                    }
+
+                    flags = comp.info().flags;
+                    twizzler_abi::syscall::sys_thread_yield();
                 }
             }
         } else {

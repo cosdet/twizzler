@@ -142,6 +142,10 @@ pub unsafe fn jump_to_user(
     syscall::return_to_user(&ctx);
 }
 
+pub fn full_shutdown() {
+    todo!("implement PSCI shutdown for aarch64");
+}
+
 pub fn debug_shutdown(_code: u32) {
     todo!()
 }

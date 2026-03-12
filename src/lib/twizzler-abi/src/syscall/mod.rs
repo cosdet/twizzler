@@ -123,6 +123,11 @@ fn twzerr(_: u64, v: u64) -> TwzError {
 }
 
 /// Shutdown the computer.
+pub fn sys_full_shutdown() {
+    unsafe { raw_syscall(Syscall::Null, &[0x87654321, 0]) };
+}
+
+/// Shutdown the computer with a return code.
 #[deprecated]
 pub fn sys_debug_shutdown(code: u32) {
     unsafe {

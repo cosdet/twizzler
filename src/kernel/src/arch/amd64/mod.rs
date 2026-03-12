@@ -90,6 +90,18 @@ pub fn set_interrupt(
     ioapic::set_interrupt(num - 32, num, masked, trigger, polarity, destination);
 }
 
+pub fn full_shutdown() {
+    log::info!("performing full shutdown");
+    unsafe {
+        // Trigger the ACPI power-off
+        x86::io::outw(0x604, 0x2000);
+    }
+    // Halt the CPU while QEMU shuts down
+    loop {
+        core::hint::spin_loop();
+    }
+}
+
 pub fn debug_shutdown(code: u32) {
     log::info!("performing debug shutdown with code {}", code);
     unsafe {

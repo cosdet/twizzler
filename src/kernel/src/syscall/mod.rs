@@ -331,13 +331,16 @@ fn do_syscall_entry<T: SyscallContext>(context: &mut T) {
         Syscall::Null => {
             if context.arg0::<u64>() == 0x12345678 {
                 crate::arch::debug_shutdown(context.arg1::<u64>() as u32);
+            } else if context.arg0::<u64>() == 0x87654321 {
+                crate::arch::full_shutdown();
+            } else {
+                logln!(
+                    "null call {:x} {:x} {:x}",
+                    context.arg0::<u64>(),
+                    context.arg1::<u64>(),
+                    context.arg2::<u64>(),
+                );
             }
-            logln!(
-                "null call {:x} {:x} {:x}",
-                context.arg0::<u64>(),
-                context.arg1::<u64>(),
-                context.arg2::<u64>(),
-            );
             context.set_return_values(0u64, 0u64);
         }
         Syscall::KernelConsoleWrite => {
