@@ -31,6 +31,3 @@ pager-dynamic = { path = "../../lib/pager/pager-dynamic" }
 ferroc = { version = "=1.0.0-pre.4-twz", default-features = false, features = [
     "global",
 ] }
-
-[profile.release]
-debug = true
