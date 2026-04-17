@@ -86,3 +86,7 @@
 [submodule "src/ports/rust_libloading"]
 	path = src/ports/rust_libloading
 	url = ../../dbittman/rust_libloading.git
+[submodule "src/ports/femto"]
+	path = src/ports/femto
+	url = https://github.com/cosdet/femto.git
+	branch = twizzler

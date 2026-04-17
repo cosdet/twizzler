@@ -9,3 +9,17 @@ src/data
 toolchain/src/rust/library/twizzler-abis
 Makefile
 .direnv/
+src/.DS_Store
+.DS_Store
+src/bin/.DS_Store
+src/kernel/.DS_Store
+src/kernel/src/.DS_Store
+src/kernel/src/arch/.DS_Store
+src/kernel/src/machine/.DS_Store
+src/kernel/src/memory/.DS_Store
+src/kernel/src/random/.DS_Store
+src/rt/.DS_Store
+src/rt/reference/.DS_Store
+src/rt/reference/src/.DS_Store
+src/rt/reference/src/runtime/.DS_Store
+toolchain/.DS_Store
