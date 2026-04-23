@@ -402,5 +402,5 @@ virtio-drivers = { path = "src/ports/virtio-drivers" }
 #librocksdb-sys = { path = "src/ports/rust-rocksdb/librocksdb-sys" }
 libloading = { path = "src/ports/rust_libloading" }
 
-#termion = { git = "https://github.com/cosdet/termion-twiz.git", branch = "femto-twiz"}
-termion = { path = "../termion-twiz" }
+termion = { git = "https://github.com/cosdet/termion-twiz.git", branch = "femto-twiz"}
+#termion = { path = "../termion-twiz" }
