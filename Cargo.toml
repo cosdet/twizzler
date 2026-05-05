@@ -27,7 +27,7 @@ members = [
     "src/rt/minimal",
     "src/lib/logboi",
     "src/srv/logboi-srv",
-    "src/srv/pager-srv",
+    #"src/srv/pager-srv",
     "src/bin/logboi-test",
     "src/lib/naming/naming-core",
     "src/lib/naming",
@@ -76,8 +76,8 @@ members = [
     "src/lib/twizzler-net",
     "src/bin/sshd",
     "src/bin/async-test",
-    "src/bin/lltest",
-    "src/bin/lltest/llt",
+    #"src/bin/lltest",
+    #"src/bin/lltest/llt",
 
     "src/ports/femto",
 ]
@@ -100,7 +100,7 @@ initrd = [
     "lib:twz-rt",
     #"lib:montest-srv",
     "lib:logboi-srv",
-    "lib:pager-srv",
+    #"lib:pager-srv",
     #"lib:cache-srv",
     #"lib:display-srv",
     #"lib:net-srv",
@@ -135,8 +135,8 @@ initrd = [
     #"crate:ls",
     #"crate:gadget",
     #"crate:serialecho",
-    "lib:llt",
-    "crate:lltest",
+    #"lib:llt",
+    #"crate:lltest",
 
     "crate:femto",
 ]
@@ -402,5 +402,5 @@ virtio-drivers = { path = "src/ports/virtio-drivers" }
 #librocksdb-sys = { path = "src/ports/rust-rocksdb/librocksdb-sys" }
 libloading = { path = "src/ports/rust_libloading" }
 
-termion = { git = "https://github.com/cosdet/termion-twiz.git", branch = "femto-twiz"}
-#termion = { path = "../termion-twiz" }
+# termion = { git = "https://github.com/cosdet/termion-twiz.git", branch = "femto-twiz"}
+termion = { path = "src/ports/termion" }

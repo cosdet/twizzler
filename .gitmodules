@@ -90,3 +90,7 @@
 	path = src/ports/femto
 	url = https://github.com/cosdet/femto.git
 	branch = twizzler
+[submodule "src/ports/termion"]
+	path = src/ports/termion
+	url = https://github.com/cosdet/termion-twiz
+	branch = femto-twiz

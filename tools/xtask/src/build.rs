@@ -679,12 +679,12 @@ pub(crate) fn do_post_toolchain_runtime_build(_cli: &BootstrapOptions) -> anyhow
     };
     compile(bc, CompileMode::Build, &other_options)?;
 
-    let bc = crate::BuildConfig {
-        profile: Profile::Release,
-        arch: Arch::Aarch64,
-        machine: Machine::Unknown,
-    };
-    compile(bc, CompileMode::Build, &other_options)?;
+    // let bc = crate::BuildConfig {
+    //     profile: Profile::Release,
+    //     arch: Arch::Aarch64,
+    //     machine: Machine::Unknown,
+    // };
+    // compile(bc, CompileMode::Build, &other_options)?;
     Ok(())
 }
 

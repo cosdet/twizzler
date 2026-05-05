@@ -27,6 +27,7 @@ DEBIAN_PKGS=(
     git
     clang
     zstd
+    meson
 )
 FEDORA_PKGS=(
     qemu-system-x86

@@ -139,7 +139,7 @@ impl Display for Triple {
 
 pub fn all_possible_platforms() -> Vec<Triple> {
     let triples = vec![
-        Triple::new(Arch::Aarch64, Machine::Unknown, Host::Twizzler, None),
+        // Triple::new(Arch::Aarch64, Machine::Unknown, Host::Twizzler, None),
         Triple::new(Arch::X86_64, Machine::Unknown, Host::Twizzler, None),
         /*
         Triple::new(
